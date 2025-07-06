@@ -3,11 +3,74 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "copy data from azure sql to Snowflake",
+				"name": "copy data from azure sql to blob",
 				"type": "Copy",
 				"dependsOn": [
 					{
 						"activity": "get_time",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_AzureSqlAdventureWorks",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_blob_bin",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "get_time",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "timestamp",
+					"value": {
+						"value": "@utcNow()",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "copy data from azure sql to blob_copy1",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "copy data from azure sql to blob",
 						"dependencyConditions": [
 							"Completed"
 						]
@@ -33,14 +96,7 @@
 							"type": "SnowflakeImportCopyCommand"
 						}
 					},
-					"enableStaging": true,
-					"stagingSettings": {
-						"linkedServiceName": {
-							"referenceName": "analyticsblobsa",
-							"type": "LinkedServiceReference"
-						},
-						"path": "staging-cont/adventure_work"
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
@@ -54,23 +110,6 @@
 						"type": "DatasetReference"
 					}
 				]
-			},
-			{
-				"name": "get_time",
-				"type": "SetVariable",
-				"dependsOn": [],
-				"policy": {
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "timestamp",
-					"value": {
-						"value": "@utcNow()",
-						"type": "Expression"
-					}
-				}
 			}
 		],
 		"variables": {
