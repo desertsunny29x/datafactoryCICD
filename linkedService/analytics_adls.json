@@ -1,0 +1,10 @@
+{
+	"name": "analytics_adls",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://analyticsadlsdev.dfs.core.windows.net/"
+		}
+	}
+}
