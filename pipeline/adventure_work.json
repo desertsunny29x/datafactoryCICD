@@ -86,9 +86,15 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "AzureSqlSource",
-						"queryTimeout": "02:00:00",
-						"partitionOption": "None"
+						"type": "BinarySource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"deleteFilesAfterCompletion": false
+						},
+						"formatSettings": {
+							"type": "BinaryReadSettings"
+						}
 					},
 					"sink": {
 						"type": "SnowflakeV2Sink",
@@ -100,7 +106,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_AzureSqlAdventureWorks",
+						"referenceName": "ds_blob_bin",
 						"type": "DatasetReference"
 					}
 				],
