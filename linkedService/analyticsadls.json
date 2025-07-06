@@ -1,0 +1,11 @@
+{
+	"name": "analyticsadls",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"serviceEndpoint": "https://analyticsadlsdev.blob.core.windows.net/",
+			"accountKind": "StorageV2"
+		}
+	}
+}
