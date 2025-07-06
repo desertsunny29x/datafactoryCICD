@@ -28,9 +28,14 @@
 						"partitionOption": "None"
 					},
 					"sink": {
-						"type": "BinarySink",
+						"type": "DelimitedTextSink",
 						"storeSettings": {
 							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ""
 						}
 					},
 					"enableStaging": false
@@ -43,7 +48,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_blob_bin",
+						"referenceName": "ds_blob_csv",
 						"type": "DatasetReference"
 					}
 				]
@@ -86,14 +91,14 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "BinarySource",
+						"type": "DelimitedTextSource",
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
-							"deleteFilesAfterCompletion": false
+							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
-							"type": "BinaryReadSettings"
+							"type": "DelimitedTextReadSettings"
 						}
 					},
 					"sink": {
@@ -106,7 +111,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_blob_bin",
+						"referenceName": "ds_blob_csv",
 						"type": "DatasetReference"
 					}
 				],
