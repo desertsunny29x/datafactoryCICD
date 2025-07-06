@@ -66,7 +66,7 @@
 				}
 			},
 			{
-				"name": "copy data from azure sql to blob_copy1",
+				"name": "copy data from blob to snowflake",
 				"type": "Copy",
 				"dependsOn": [
 					{
