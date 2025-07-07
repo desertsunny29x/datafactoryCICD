@@ -1,0 +1,18 @@
+{
+	"name": "ds_blob_bin",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "analyticsblobsa",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "customer",
+				"container": "adventureworks-cont"
+			}
+		}
+	}
+}

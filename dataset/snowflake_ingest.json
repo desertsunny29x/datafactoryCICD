@@ -1,0 +1,16 @@
+{
+	"name": "snowflake_ingest",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "snowflake_raw",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [],
+		"typeProperties": {
+			"schema": "adventureworks",
+			"table": "customer"
+		}
+	}
+}
